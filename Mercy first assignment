@@ -1,0 +1,317 @@
+Sure, here are the implementations of a singly linked list, a doubly linked list, and a circular linked list using C:Sure, here are the implementations of a singly linked list, a doubly linked list, and a circular linked list using C:
+
+### Singly Linked List
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int data;
+    struct Node* next;
+} Node;
+
+Node* createNode(int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+void append(Node** headRef, int data) {
+    Node* newNode = createNode(data);
+    if (*headRef == NULL) {
+        *headRef = newNode;
+    } else {
+        Node* temp = *headRef;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
+}
+
+void display(Node* head) {
+    Node* temp = head;
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    Node* head = NULL;
+    append(&head, 1);
+    append(&head, 2);
+    append(&head, 3);
+    display(head);
+    return 0;
+}
+```
+
+### Doubly Linked List
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int data;
+    struct Node* next;
+    struct Node* prev;
+} Node;
+
+Node* createNode(int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    newNode->prev = NULL;
+    return newNode;
+}
+
+void append(Node** headRef, int data) {
+    Node* newNode = createNode(data);
+    if (*headRef == NULL) {
+        *headRef = newNode;
+    } else {
+        Node* temp = *headRef;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+        newNode->prev = temp;
+    }
+}
+
+void display(Node* head) {
+    Node* temp = head;
+    while (temp != NULL) {
+        printf("%d <-> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    Node* head = NULL;
+    append(&head, 1);
+    append(&head, 2);
+    append(&head, 3);
+    display(head);
+    return 0;
+}
+```
+
+### Circular Linked List
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int data;
+    struct Node* next;
+} Node;
+
+Node* createNode(int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+void append(Node** headRef, int data) {
+    Node* newNode = createNode(data);
+    if (*headRef == NULL) {
+        *headRef = newNode;
+        newNode->next = *headRef;
+    } else {
+        Node* temp = *headRef;
+        while (temp->next != *headRef) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+        newNode->next = *headRef;
+    }
+}
+
+void display(Node* head) {
+    if (head == NULL) return;
+    Node* temp = head;
+    do {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    } while (temp != head);
+    printf("(head)\n");
+}
+
+int main() {
+    Node* head = NULL;
+    append(&head, 1);
+    append(&head, 2);
+    append(&head, 3);
+    display(head);
+    return 0;
+}
+```
+
+These C examples demonstrate basic implementations of singly, doubly, and circular linked lists. You can expand these examples by adding more features such as insertions at specific positions, deletions, and more complex operations.
+
+### Singly Linked List
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int data;
+    struct Node* next;
+} Node;
+
+Node* createNode(int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+void append(Node** headRef, int data) {
+    Node* newNode = createNode(data);
+    if (*headRef == NULL) {
+        *headRef = newNode;
+    } else {
+        Node* temp = *headRef;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
+}
+
+void display(Node* head) {
+    Node* temp = head;
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    Node* head = NULL;
+    append(&head, 1);
+    append(&head, 2);
+    append(&head, 3);
+    display(head);
+    return 0;
+}
+```
+
+### Doubly Linked List
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int data;
+    struct Node* next;
+    struct Node* prev;
+} Node;
+
+Node* createNode(int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    newNode->prev = NULL;
+    return newNode;
+}
+
+void append(Node** headRef, int data) {
+    Node* newNode = createNode(data);
+    if (*headRef == NULL) {
+        *headRef = newNode;
+    } else {
+        Node* temp = *headRef;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+        newNode->prev = temp;
+    }
+}
+
+void display(Node* head) {
+    Node* temp = head;
+    while (temp != NULL) {
+        printf("%d <-> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    Node* head = NULL;
+    append(&head, 1);
+    append(&head, 2);
+    append(&head, 3);
+    display(head);
+    return 0;
+}
+```
+
+### Circular Linked List
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int data;
+    struct Node* next;
+} Node;
+
+Node* createNode(int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+void append(Node** headRef, int data) {
+    Node* newNode = createNode(data);
+    if (*headRef == NULL) {
+        *headRef = newNode;
+        newNode->next = *headRef;
+    } else {
+        Node* temp = *headRef;
+        while (temp->next != *headRef) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+        newNode->next = *headRef;
+    }
+}
+
+void display(Node* head) {
+    if (head == NULL) return;
+    Node* temp = head;
+    do {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    } while (temp != head);
+    printf("(head)\n");
+}
+
+int main() {
+    Node* head = NULL;
+    append(&head, 1);
+    append(&head, 2);
+    append(&head, 3);
+    display(head);
+    return 0;
+}
+```
+
+These C examples demonstrate basic implementations of singly, doubly, and circular linked lists. You can expand these examples by adding more features such as insertions at specific positions, deletions, and more complex operations.
