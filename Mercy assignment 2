@@ -1,0 +1,144 @@
+ implementations of a stack and a queue using Visual Basic (VB):
+
+### Stack Implementation
+
+```vb
+Module StackModule
+    Class Node
+        Public Data As Integer
+        Public [Next] As Node
+
+        Public Sub New(data As Integer)
+            Me.Data = data
+            Me.Next = Nothing
+        End Sub
+    End Class
+
+    Class Stack
+        Private top As Node
+
+        Public Sub Push(data As Integer)
+            Dim newNode As New Node(data)
+            If top IsNot Nothing Then
+                newNode.Next = top
+            End If
+            top = newNode
+        End Sub
+
+        Public Function Pop() As Integer
+            If top Is Nothing Then
+                Throw New InvalidOperationException("Stack is empty")
+            End If
+            Dim poppedValue As Integer = top.Data
+            top = top.Next
+            Return poppedValue
+        End Function
+
+        Public Function Peek() As Integer
+            If top Is Nothing Then
+                Throw New InvalidOperationException("Stack is empty")
+            End If
+            Return top.Data
+        End Function
+
+        Public Function IsEmpty() As Boolean
+            Return top Is Nothing
+        End Function
+
+        Public Sub Display()
+            Dim temp As Node = top
+            While temp IsNot Nothing
+                Console.Write(temp.Data & " ")
+                temp = temp.Next
+            End While
+            Console.WriteLine()
+        End Sub
+    End Class
+
+    Sub Main()
+        Dim stack As New Stack()
+        stack.Push(1)
+        stack.Push(2)
+        stack.Push(3)
+        stack.Display()
+        Console.WriteLine("Popped: " & stack.Pop())
+        stack.Display()
+    End Sub
+End Module
+```
+
+### Queue Implementation
+
+```vb
+Module QueueModule
+    Class Node
+        Public Data As Integer
+        Public [Next] As Node
+
+        Public Sub New(data As Integer)
+            Me.Data = data
+            Me.Next = Nothing
+        End Sub
+    End Class
+
+    Class Queue
+        Private front As Node
+        Private rear As Node
+
+        Public Sub Enqueue(data As Integer)
+            Dim newNode As New Node(data)
+            If rear Is Nothing Then
+                front = newNode
+                rear = newNode
+            Else
+                rear.Next = newNode
+                rear = newNode
+            End If
+        End Sub
+
+        Public Function Dequeue() As Integer
+            If front Is Nothing Then
+                Throw New InvalidOperationException("Queue is empty")
+            End If
+            Dim dequeuedValue As Integer = front.Data
+            front = front.Next
+            If front Is Nothing Then
+                rear = Nothing
+            End If
+            Return dequeuedValue
+        End Function
+
+        Public Function Peek() As Integer
+            If front Is Nothing Then
+                Throw New InvalidOperationException("Queue is empty")
+            End If
+            Return front.Data
+        End Function
+
+        Public Function IsEmpty() As Boolean
+            Return front Is Nothing
+        End Function
+
+        Public Sub Display()
+            Dim temp As Node = front
+            While temp IsNot Nothing
+                Console.Write(temp.Data & " ")
+                temp = temp.Next
+            End While
+            Console.WriteLine()
+        End Sub
+    End Class
+
+    Sub Main()
+        Dim queue As New Queue()
+        queue.Enqueue(1)
+        queue.Enqueue(2)
+        queue.Enqueue(3)
+        queue.Display()
+        Console.WriteLine("Dequeued: " & queue.Dequeue())
+        queue.Display()
+    End Sub
+End Module
+```
+
+These implementations of a stack and a queue in Visual Basic use linked lists to manage the elements. The `Stack` class includes methods to push, pop, peek, check if the stack is empty, and display the elements. The `Queue` class includes methods to enqueue, dequeue, peek, check if the queue is empty, and display the elements.
